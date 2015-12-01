@@ -27,4 +27,4 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
-mainClassName = 'com.github.xwgou.namesurfer.JSurfer'
+mainClassName = 'com.github.xwgou.namesurfer.NameSurfer'
