@@ -9,6 +9,7 @@ import com.github.xwgou.namesurfer.cli.JSurferOptions;
 import de.mfo.jsurf.rendering.*;
 import de.mfo.jsurf.parser.*;
 import de.mfo.jsurf.algebra.*;
+import de.mfo.jsurf.gui.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -345,7 +346,7 @@ public class JSurferPanel extends JPanel {
         });
 
         renderer = new JSurferRenderPanel();
-        renderer.setScale(1f / 0.25f);
+        renderer.setScale( 0.6 );
         //renderer.setResizeImageWithComponent( true );
     }
 
