@@ -15,11 +15,11 @@ http://stackoverflow.com/a/12681060/1496589
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="topNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" alignment="center" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="topNode" alignment="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox id="mainPane" VBox.vgrow="ALWAYS">
+      <HBox id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
          <children>
-            <RenderPanel HBox.hgrow="ALWAYS"/>
+            <RenderPanel HBox.hgrow="ALWAYS" />
             <VBox id="colorPickers" alignment="BOTTOM_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0">
                <children>
                   <Group>
