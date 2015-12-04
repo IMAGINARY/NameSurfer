@@ -6,6 +6,7 @@
 package com.github.xwgou.namesurfer;
 
 import com.github.xwgou.namesurfer.gui.JSurferPanel;
+import com.github.xwgou.namesurfer.fxui.JFXNameSurferPanel;
 
 /**
  *
@@ -13,5 +14,6 @@ import com.github.xwgou.namesurfer.gui.JSurferPanel;
  */
 public class NameSurfer
 {
-    public static void main( String[] args ) { JSurferPanel.main( args ); }
+    //public static void main( String[] args ) { JSurferPanel.main( args ); }
+    public static void main( String[] args ) { JFXNameSurferPanel.main( args ); }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- how to make a custom component:
+http://stackoverflow.com/a/12681060/1496589
+/-->
+
+<?import com.github.xwgou.namesurfer.fxui.*?>
+<?import com.github.xwgou.namesurfer.fxml.*?>
+<?import javafx.scene.image.*?>
+<?import jfxtras.labs.scene.layout.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox id="topNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" alignment="center" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox id="mainPane" VBox.vgrow="ALWAYS">
+         <children>
+            <RenderPanel HBox.hgrow="ALWAYS"/>
+            <VBox id="colorPickers" alignment="BOTTOM_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0">
+               <children>
+                  <Group>
+                     <children>
+                        <CustomColorPicker id="ccp1" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
+                     </children>
+                  </Group>
+                  <Group>
+                     <children>
+                        <CustomColorPicker id="ccp2" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox>
+         <children>
+            <TextField id="name" promptText="Enter your name" />
+            <TextField id="formula" promptText="Enter a formula" />
+         </children>
+      </VBox>
+   </children>
+</VBox>
