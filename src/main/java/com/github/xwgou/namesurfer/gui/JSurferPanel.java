@@ -490,13 +490,13 @@ public class JSurferPanel extends JPanel {
 
             String keywords = new File( SyllableTranslator.class.getResource( "keywords.properties" ).toURI() ).getCanonicalPath();
             if (cmd.hasOption(JSurferOptions.KEYWORDS)) {
-                rules = cmd.getOptionValue(JSurferOptions.KEYWORDS);
+            	keywords = cmd.getOptionValue(JSurferOptions.KEYWORDS);
             }
 
             f.setSize(d);
             f.setVisible(true);
 
-            JSurferPanel.translator = new PinyinTranslator(keywords, rules);
+            JSurferPanel.translator = new PinyinTranslator(rules, keywords);
 
         } catch (ParseException ex) {
             System.out.println(ex.getMessage());
