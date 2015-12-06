@@ -31,7 +31,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
-public class RenderPanel extends VBox {
+public class RenderPanel extends Pane {
 
     final static Logger logger = LoggerFactory.getLogger( RenderPanel.class );
 

@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root  alignment="CENTER" fx:id="vbox" prefHeight="512.0" prefWidth="512.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" onMousePressed="#handleMousePressed" onMouseReleased="#handleMouseReleased" onMouseDragged="#handleMouseDragged"  onScroll="#handleScroll" onZoom="#handleZoom" fx:controller="com.github.xwgou.namesurfer.fxui.RenderPanelController">
+<fx:root fx:id="pane" prefHeight="512.0" prefWidth="512.0" type="Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" onMousePressed="#handleMousePressed" onMouseReleased="#handleMouseReleased" onMouseDragged="#handleMouseDragged"  onScroll="#handleScroll" onZoom="#handleZoom" fx:controller="com.github.xwgou.namesurfer.fxui.RenderPanelController">
    <children>
       <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
