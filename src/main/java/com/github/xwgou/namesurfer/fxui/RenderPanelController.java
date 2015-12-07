@@ -165,16 +165,6 @@ public class RenderPanelController implements Initializable {
                 iv.setImage( wi );
                 iv.setViewport( new Rectangle2D( 0.0, 0.0, ib.width, ib.height ) );
             });
-
-/*
-            java.io.File file = new java.io.File("rendering.png");
-            java.io.File file2 = new java.io.File("rendering2.png");
-            try {
-                javax.imageio.ImageIO.write(javafx.embed.swing.SwingFXUtils.fromFXImage(wi, null), "png", file);
-                saveToPNG( file2 );
-            } catch (Exception s) {
-            }
-            */
         }
     }
 
