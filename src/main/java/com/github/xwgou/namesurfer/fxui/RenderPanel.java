@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.paint.Color;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,5 +65,29 @@ public class RenderPanel extends Pane {
 
     public StringProperty formulaProperty() {
         return controller.formula;
+    }
+
+    public void setFrontColor(Color c) {
+        controller.frontColor.setValue( c );
+    }
+
+    public Color getFrontColor() {
+        return controller.frontColor.getValue();
+    }
+
+    public ObjectProperty< Color > frontColorProperty() {
+        return controller.frontColor;
+    }
+
+    public void setBackColor(Color c) {
+        controller.backColor.setValue( c );
+    }
+
+    public Color getBackColor() {
+        return controller.backColor.getValue();
+    }
+
+    public ObjectProperty< Color > backColorProperty() {
+        return controller.backColor;
     }
 }

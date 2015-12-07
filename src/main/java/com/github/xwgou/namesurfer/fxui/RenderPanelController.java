@@ -29,6 +29,7 @@ import javax.vecmath.*;
 import java.util.Properties;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
+import javafx.scene.paint.Color;
 
 import java.awt.image.*;
 import java.awt.Point;
@@ -45,8 +46,11 @@ import org.slf4j.LoggerFactory;
 
 public class RenderPanelController implements Initializable {
 
-    protected StringProperty formula = new SimpleStringProperty();
-    protected BooleanProperty formulaValid;
+    protected final StringProperty formula = new SimpleStringProperty( this, "formula", "0" );
+    protected final BooleanProperty formulaValid = new SimpleBooleanProperty( this, "formulaValid", true );
+
+    protected final ObjectProperty<javafx.scene.paint.Color> frontColor = new SimpleObjectProperty<javafx.scene.paint.Color>(this, "frontColor", javafx.scene.paint.Color.RED);
+    protected final ObjectProperty<javafx.scene.paint.Color> backColor = new SimpleObjectProperty<javafx.scene.paint.Color>(this, "backColor", javafx.scene.paint.Color.GREY);
 
     @FXML protected Pane pane;
     @FXML protected ImageView imageView;
@@ -116,6 +120,20 @@ public class RenderPanelController implements Initializable {
                 }
             }
         );
+
+        frontColor.addListener( (observable, oldValue, newValue) -> {
+            de.mfo.jsurf.rendering.Material m = asr.getFrontMaterial();
+            m.setColor( new Color3f( (float) newValue.getRed(), (float) newValue.getGreen(), (float) newValue.getBlue() ) );
+            asr.setFrontMaterial( m );
+            rw.scheduleRepaint();
+        } );
+
+        backColor.addListener( (observable, oldValue, newValue) -> {
+            de.mfo.jsurf.rendering.Material m = asr.getBackMaterial();
+            m.setColor( new Color3f( (float) newValue.getRed(), (float) newValue.getGreen(), (float) newValue.getBlue() ) );
+            asr.setBackMaterial( m );
+            rw.scheduleRepaint();
+        } );
     }
 
     // used for dirty hack that still makes dragging working on some touchscreens which send mouse events in wrong order

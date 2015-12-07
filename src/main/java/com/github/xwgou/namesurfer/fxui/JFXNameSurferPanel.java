@@ -83,18 +83,6 @@ public class JFXNameSurferPanel extends Application {
             final Scene scene = new Scene(scp, 1024, 576);
             scene.getStylesheets().add(getClass().getResource("../css/color.css").toExternalForm());
 
-            CustomColorPicker ccp_1 = new CustomColorPicker();
-            CustomColorPicker ccp_2 = new CustomColorPicker();
-            ccp_1.setScaleX( 0.75 );
-            ccp_1.setScaleY( 0.75 );
-            ccp_2.setScaleX( 0.75 );
-            ccp_2.setScaleY( 0.75 );
-
-            VBox colorPickersVBox = ( VBox ) scene.lookup( "#colorPickers" );
-            colorPickersVBox.getChildren().clear();
-            colorPickersVBox.getChildren().add( new Group( ccp_1 ) );
-            colorPickersVBox.getChildren().add( new Group( ccp_2 ) );
-
             // set up the renderer
             try {
                 renderer.loadFromFile( getClass().getResource( "../gui/CayleyCubic.jsurf" ) );
@@ -116,6 +104,12 @@ public class JFXNameSurferPanel extends Application {
                 )
             );
             renderPanel.formulaProperty().bind( formulaTextField.textProperty() );
+
+            CustomColorPicker ccp_1 = ( CustomColorPicker ) scene.lookup( "#ccp1" );
+            renderPanel.frontColorProperty().bind( ccp_1.customColorProperty() );
+            CustomColorPicker ccp_2 = ( CustomColorPicker ) scene.lookup( "#ccp2" );
+            renderPanel.backColorProperty().bind( ccp_2.customColorProperty() );
+
 /*
             // add the renderer to the scene and ensure quadratic size
             final SwingNode jsurferRenderPanelWrapper = ( SwingNode ) scene.lookup( "#JSurferRenderPanelWrapper" );
