@@ -193,11 +193,11 @@ public class JFXNameSurferPanel extends Application {
 
             String keywords = new File( SyllableTranslator.class.getResource( "keywords.properties" ).toURI() ).getCanonicalPath();
             if (cmd.hasOption(JSurferOptions.KEYWORDS)) {
-                rules = cmd.getOptionValue(JSurferOptions.KEYWORDS);
+                keywords = cmd.getOptionValue(JSurferOptions.KEYWORDS);
             }
 
-            //translator = new PinyinTranslator(keywords, rules);
-            translator = new SyllableTranslator(keywords, rules);
+            //translator = new PinyinTranslator( rules, keywords );
+            translator = new SyllableTranslator( rules, keywords );
 
             launch(args);
         } catch ( Throwable t ) {
