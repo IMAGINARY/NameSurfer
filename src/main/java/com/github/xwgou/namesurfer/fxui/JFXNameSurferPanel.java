@@ -48,7 +48,6 @@ import org.apache.commons.cli.ParseException;
 public class JFXNameSurferPanel extends Application {
 
     final static Logger logger = LoggerFactory.getLogger( JFXNameSurferPanel.class );
-    final JSurferRenderPanel renderer = new JSurferRenderPanel();
     static ITranslator translator;
 
     @Override
@@ -82,13 +81,6 @@ public class JFXNameSurferPanel extends Application {
 
             final Scene scene = new Scene(scp, 1024, 576);
             scene.getStylesheets().add(getClass().getResource("../css/color.css").toExternalForm());
-
-            // set up the renderer
-            try {
-                renderer.loadFromFile( getClass().getResource( "../gui/CayleyCubic.jsurf" ) );
-            } catch( Exception ex ) {
-                logger.error( "Unable to load default renderer configuration CayleyCubic.jsurf.", ex );
-            }
 
             // connect name input field to formula input field
             final TextField nameTextField = ( TextField ) scene.lookup( "#name" );
@@ -137,21 +129,6 @@ public class JFXNameSurferPanel extends Application {
                     topNode.setPrefWidth( 576 * aspect_ratio );
                 else
                     topNode.setPrefHeight( 1024 / aspect_ratio );
-/*
-                Bounds b = swingNodeWrapper.localToScene( swingNodeWrapper.getBoundsInLocal(), false );
-                renderer.setBounds( 0,
-                    0,
-                    ( int ) Math.round( b.getWidth() ),
-                    ( int ) Math.round( b.getHeight() )
-                );
-
-                swingNodeWrapper3.setPrefWidth( b.getWidth() );
-                swingNodeWrapper3.setPrefHeight( b.getHeight() );
-                swingNodeWrapper3.relocate( 100, 100 );
-                //swingNodeWrapper3.resizeRelocate( b.getMinX(), b.getMinY(), b.getWidth(), b.getHeight() );
-
-                logger.debug( "bounds: {}", b );
-                */
             });
 
             stage.setTitle("NameSurfer");
