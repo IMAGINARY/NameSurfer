@@ -125,16 +125,12 @@ public class JFXNameSurferPanel extends Application {
                 renderer.setSize( new java.awt.Dimension( (int) newValue.getHeight(), (int) newValue.getHeight() ) );
             });
 */
-            // ensure aspect ratio bigger than 4:3
-            stage.maxHeightProperty().bind(scene.widthProperty().divide(4).multiply(3));
-            stage.minWidthProperty().bind(scene.heightProperty().divide(3).multiply(4));
 
             final VBox topNode = ( VBox ) scene.lookup( "#topNode" );
             scp.layoutBoundsProperty().addListener( (observable, oldValue, newValue) -> {
                 double aspect_ratio = scene.getWidth() / scene.getHeight();
                 logger.debug( scp.getLayoutBounds().toString() );
                 logger.debug( "" + aspect_ratio );
-                aspect_ratio = aspect_ratio < 4.0 / 3.0 ? 4.0 / 3.0 : aspect_ratio;
                 topNode.setPrefWidth( 1024 );
                 topNode.setPrefHeight( 576 );
                 if( aspect_ratio > 1024 / 576 )
