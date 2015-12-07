@@ -28,6 +28,7 @@ import java.util.concurrent.Semaphore;
 import javax.vecmath.*;
 import java.util.Properties;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 
 import java.awt.image.*;
 import java.awt.Point;
@@ -55,6 +56,8 @@ public class RenderPanelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        final ImageView imageView = this.imageView;
+
         NumberBinding size = Bindings.min( pane.widthProperty(), pane.heightProperty() );
         size.addListener( ( observable, oldValue, newValue ) -> { rw.scheduleRepaint(); } );
         imageView.fitWidthProperty().bind( size );
@@ -64,6 +67,19 @@ public class RenderPanelController implements Initializable {
         imageView.setImage( new Image( "http://www.algebraicsurface.net/images/AlgSurfTitlePic.jpg" ) );
         imageView.setScaleY( -1.0 );
 
+
+        ChangeListener<Object> updater = (observable, oldValue, newValue) -> {
+            Bounds b = imageView.localToScene( imageView.getBoundsInLocal());
+            Dimension newDesiredRenderSize = new Dimension( ( int ) Math.round( b.getWidth() ), ( int ) Math.round( b.getHeight() ) );
+            if( !newDesiredRenderSize.equals( desiredRenderSize ) )
+            {
+                desiredRenderSize = newDesiredRenderSize;
+                rw.scheduleRepaint();
+                logger.debug( "{}", desiredRenderSize );
+            }
+        };
+        imageView.boundsInLocalProperty().addListener(updater);
+        imageView.localToSceneTransformProperty().addListener(updater);
 
         asr = new CPUAlgebraicSurfaceRenderer();
         try {
@@ -79,6 +95,7 @@ public class RenderPanelController implements Initializable {
 
         minLowResRenderSize = new Dimension( 150, 150 );
         maxLowResRenderSize = new Dimension( 512, 512 );
+        desiredRenderSize = ( Dimension ) maxLowResRenderSize.clone(); 
 
         rsd = new RotateSphericalDragger();
         scale = new Matrix4d();
@@ -115,8 +132,15 @@ public class RenderPanelController implements Initializable {
         e.consume();
     }
 
-    @FXML protected void handleScroll( ScrollEvent e ) { logger.debug( "{}", e ); e.consume(); }
-    @FXML protected void handleZoom( ZoomEvent e ) { logger.debug( "{}", e ); e.consume(); }
+    @FXML protected void handleScroll( ScrollEvent e ) {
+        scaleSurface( ( int ) ( e.getDeltaX() + e.getDeltaY() ) );
+        logger.debug( "{}", e ); e.consume();
+    }
+
+    @FXML protected void handleZoom( ZoomEvent e ) {
+        zoomSurface( e.getZoomFactor() );
+        logger.debug( "{}", e ); e.consume();
+    }
 
     public void repaint() {
         final ImgBuffer ib = currentSurfaceImage;
@@ -141,6 +165,33 @@ public class RenderPanelController implements Initializable {
             }
             */
         }
+    }
+
+    public void setScale( double scaleFactor )
+    {
+        if (scaleFactor<-2.0)scaleFactor=-2.0;
+        if (scaleFactor>2.0)scaleFactor=2.0;
+
+        scaleFactor= Math.pow( 10, scaleFactor);
+        scale.setScale( scaleFactor );
+        rw.scheduleRepaint();
+    }
+
+    public double getScale()
+    {
+        return Math.log10(this.scale.getScale());
+    }
+
+    protected void scaleSurface( int units )
+    {
+        this.setScale(this.getScale()-units/50.0 );
+        rw.scheduleRepaint();
+    }
+
+    protected void zoomSurface( double amount )
+    {
+        scale.set( scale.m00 / amount );
+        rw.scheduleRepaint();
     }
 
     static BufferedImage createBufferedImageFromRGB( ImgBuffer ib )
@@ -203,6 +254,7 @@ public class RenderPanelController implements Initializable {
     boolean resizeImageWithComponent;
     boolean renderCoordinatenSystem;
     Dimension renderSize;
+    Dimension desiredRenderSize;
     Dimension minLowResRenderSize;
     Dimension maxLowResRenderSize;
     RotateSphericalDragger rsd;
@@ -256,7 +308,7 @@ public class RenderPanelController implements Initializable {
                     skip_hi_res = false;
                     long minPixels = RenderPanelController.this.minLowResRenderSize.width *RenderPanelController.this.minLowResRenderSize.height;
                     long maxPixels =RenderPanelController.this.maxLowResRenderSize.width *RenderPanelController.this.maxLowResRenderSize.height;
-                    maxPixels = Math.max( 1, Math.min( maxPixels, (long) ( RenderPanelController.this.imageView.getFitWidth() *RenderPanelController.this.imageView.getFitHeight() ) ) );
+                    maxPixels = Math.max( 1, Math.min( maxPixels, (long) ( RenderPanelController.this.desiredRenderSize.getWidth() *RenderPanelController.this.desiredRenderSize.getHeight() ) ) );
                     minPixels = Math.min( minPixels, maxPixels );
                     long numPixelsAt15FPS = ( long ) ( 1.0 / ( desired_fps * time_per_pixel ) );
                     long pixelsToUse = Math.max( minPixels, Math.min( maxPixels, numPixelsAt15FPS ) );
@@ -283,7 +335,7 @@ public class RenderPanelController implements Initializable {
                     // render high res, if no new low res rendering is scheduled
                     {
                         is_drawing_hi_res = true;
-                        ImgBuffer ib = draw( (int) RenderPanelController.this.imageView.getFitWidth(),(int)RenderPanelController.this.imageView.getFitHeight(), AntiAliasingMode.ADAPTIVE_SUPERSAMPLING, AntiAliasingPattern.OG_4x4, false );
+                        ImgBuffer ib = draw( (int) RenderPanelController.this.desiredRenderSize.getWidth(),(int)RenderPanelController.this.desiredRenderSize.getHeight(), AntiAliasingMode.ADAPTIVE_SUPERSAMPLING, AntiAliasingPattern.OG_4x4, false );
                         if( ib != null )
                         {
                             currentSurfaceImage =  ib;
@@ -301,7 +353,7 @@ public class RenderPanelController implements Initializable {
                     {
                         //System.out.println( "drawing hi res");
                         is_drawing_hi_res = true;
-                        ImgBuffer ib = draw((int)RenderPanelController.this.imageView.getFitWidth(),(int)RenderPanelController.this.imageView.getFitHeight(), AntiAliasingMode.SUPERSAMPLING, AntiAliasingPattern.OG_4x4, false );
+                        ImgBuffer ib = draw((int)RenderPanelController.this.desiredRenderSize.getWidth(),(int)RenderPanelController.this.desiredRenderSize.getHeight(), AntiAliasingMode.SUPERSAMPLING, AntiAliasingPattern.OG_4x4, false );
                         if( ib != null )
                         {
                             currentSurfaceImage =  ib;
