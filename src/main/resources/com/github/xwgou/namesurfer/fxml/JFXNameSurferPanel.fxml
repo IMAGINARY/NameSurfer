@@ -19,7 +19,7 @@ http://stackoverflow.com/a/12681060/1496589
    <children>
       <HBox id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
          <children>
-            <RenderPanel HBox.hgrow="ALWAYS" />
+            <RenderPanel id="renderPanel" HBox.hgrow="ALWAYS" />
             <VBox id="colorPickers" alignment="BOTTOM_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0">
                <children>
                   <Group>

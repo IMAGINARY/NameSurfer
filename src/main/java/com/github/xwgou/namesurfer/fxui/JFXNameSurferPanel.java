@@ -105,6 +105,7 @@ public class JFXNameSurferPanel extends Application {
             // connect name input field to formula input field
             final TextField nameTextField = ( TextField ) scene.lookup( "#name" );
             final TextField formulaTextField = ( TextField ) scene.lookup( "#formula" );
+            final RenderPanel renderPanel = ( RenderPanel ) scene.lookup( "#renderPanel" );
 
             System.out.println(translator.translate( "Christian Stussak" ));
 
@@ -114,6 +115,7 @@ public class JFXNameSurferPanel extends Application {
                     nameTextField.textProperty()
                 )
             );
+            renderPanel.formulaProperty().bind( formulaTextField.textProperty() );
 /*
             // add the renderer to the scene and ensure quadratic size
             final SwingNode jsurferRenderPanelWrapper = ( SwingNode ) scene.lookup( "#JSurferRenderPanelWrapper" );

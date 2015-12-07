@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 
 public class RenderPanelController implements Initializable {
 
-    protected StringProperty formula;
+    protected StringProperty formula = new SimpleStringProperty();
     protected BooleanProperty formulaValid;
 
     @FXML protected Pane pane;
@@ -105,6 +105,17 @@ public class RenderPanelController implements Initializable {
         rw = new RenderWorker();
         rw.start();
         rw.scheduleRepaint();
+
+        formula.addListener( (observable, oldValue, newValue) -> {
+            if( newValue != null && !newValue.isEmpty() )
+            {
+                try {
+                    asr.setSurfaceFamily( newValue );
+                } catch ( Exception e ) {
+                    logger.error( "", e ); } rw.scheduleRepaint();
+                }
+            }
+        );
     }
 
     // used for dirty hack that still makes dragging working on some touchscreens which send mouse events in wrong order
