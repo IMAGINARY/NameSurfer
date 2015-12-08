@@ -165,8 +165,7 @@ public class JFXNameSurferPanel extends Application {
                 keywords = cmd.getOptionValue(JSurferOptions.KEYWORDS);
             }
 
-            //translator = new PinyinTranslator( rules, keywords );
-            translator = new SyllableTranslator( rules, keywords );
+            translator = new PinyinTranslator( rules, keywords );
 
             launch(args);
         } catch ( Throwable t ) {
