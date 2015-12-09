@@ -1,5 +1,5 @@
 group = 'com.github.xwgou'
-version = '0.1.0'
+version = '0.2.0'
 
 apply from: 'https://bintray.com/artifact/download/shemnon/javafx-gradle/8.1.1/javafx.plugin'
 
