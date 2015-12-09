@@ -22,7 +22,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 public class PinyinTranslator extends  SyllableTranslator {
 
 
-    public PinyinTranslator() throws IOException {
+    public PinyinTranslator() {
         super();
     }
 

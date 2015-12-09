@@ -4,6 +4,7 @@
  */
 package com.github.xwgou.namesurfer.translator;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,15 +28,39 @@ public class SyllableTranslator implements ITranslator {
 //    private static final String PLUSEPSILON = "+0.00001";
     private static final String SUBEPSILON = "0";
 
-    private static final String RULES_PATH = "rules.properties";
-    private static final String KEYWORDS_PATH = "keywords.properties";
+    private static String getRulesPath()
+    {
+        try {
+            return new File( SyllableTranslator.class.getResource( "rules.properties" ).toURI() ).getCanonicalPath();
+        } catch( Exception e )
+        {
+            throw new RuntimeException( e );
+        }
+    }
 
-    public SyllableTranslator() throws IOException {
+    private static String getKeywordsPath()
+    {
+        try {
+            return new File( SyllableTranslator.class.getResource( "keywords.properties" ).toURI() ).getCanonicalPath();
+        } catch( Exception e )
+        {
+            throw new RuntimeException( e );
+        }
+    }
+
+    public static final String RULES_PATH = getRulesPath();
+    public static final String KEYWORDS_PATH = getKeywordsPath();
+
+    public SyllableTranslator() {
         this.rules = new Properties();
         this.keywords = new Properties();
 
-        this.rules.load(new FileInputStream(RULES_PATH));
-        this.keywords.load(new FileInputStream(KEYWORDS_PATH));
+        try {
+            this.rules.load(new FileInputStream(RULES_PATH));
+            this.keywords.load(new FileInputStream(KEYWORDS_PATH));
+        } catch( IOException e ) {
+            throw new RuntimeException( e );
+        }
 //        this.addEpsilonToKeywords();
 //        loadDefaultKeyWords();
 //        loadDefaultRules();
