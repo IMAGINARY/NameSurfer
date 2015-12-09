@@ -33,10 +33,27 @@ jar {
     manifest {
         attributes( "Implementation-Title": project.group,
                    "Implementation-Version": project.version,
-                   "Implementation-Vendor": "Xin Wei Gou, Christian Stussak" )
+                   "Implementation-Vendor": "Xin Wei Gou and Christian Stussak" )
     }
 }
 
 javafx {
+    appID 'NameSurfer'
+    appName 'NameSurfer'
+    category = 'Visualization'
+    copyright = 'Copyright (c) 2015 Xin Wei Gou and Christian Stussak'
+    description = '''Interactive visualization of algebraic surfaces.'''
+    vendor = 'Xin Wei Gou and Christian Stussak'
+
     mainClass = 'com.github.xwgou.namesurfer.NameSurfer'
+
+    icons {
+        shortcut = [
+                'icon-256.png'
+        ]
+        volume = shortcut
+        setup = 'icon-32.bmp'
+    }
+
+    installSystemWide = true
 }
