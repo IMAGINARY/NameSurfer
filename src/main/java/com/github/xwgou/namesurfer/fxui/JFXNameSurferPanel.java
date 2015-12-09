@@ -1,7 +1,7 @@
 package com.github.xwgou.namesurfer.fxui;
 
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.fxml.FXMLLoader;
 import javafx.util.Callback;
 
@@ -13,7 +13,7 @@ import com.github.xwgou.namesurfer.translator.PinyinTranslator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JFXNameSurferPanel extends VBox {
+public class JFXNameSurferPanel extends GridPane {
 
     final static Logger logger = LoggerFactory.getLogger( JFXNameSurferPanel.class );
 
