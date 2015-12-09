@@ -6,9 +6,7 @@ package com.github.xwgou.namesurfer.translator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
