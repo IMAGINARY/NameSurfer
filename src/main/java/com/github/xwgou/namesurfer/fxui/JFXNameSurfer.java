@@ -10,6 +10,9 @@ import javafx.beans.value.ObservableValue;
 
 import jfxtras.labs.scene.layout.ScalableContentPane;
 
+import java.io.InputStream;
+import java.io.FileInputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,9 +54,7 @@ public class JFXNameSurfer extends Application {
             );
 
             final Scene scene = new Scene(scp, 1024, 576);
-            scene.getStylesheets().add(getClass().getResource("../css/color.css").toExternalForm());
-
-            System.out.println(translator.translate( "Christian Stussak" ));
+            scene.getStylesheets().add(getClass().getResource("/com/github/xwgou/namesurfer/css/color.css").toExternalForm());
 
             scp.layoutBoundsProperty().addListener( (observable, oldValue, newValue) -> {
                 double aspect_ratio = scene.getWidth() / scene.getHeight();
@@ -109,14 +110,14 @@ public class JFXNameSurfer extends Application {
     			return;
     		}
 
-            String rules = PinyinTranslator.RULES_PATH;
+            InputStream rules = PinyinTranslator.RULES_PATH.openStream();
             if (cmd.hasOption(JSurferOptions.RULES)) {
-                rules = cmd.getOptionValue(JSurferOptions.RULES);
+                rules = new FileInputStream( cmd.getOptionValue(JSurferOptions.RULES) );
             }
 
-            String keywords = PinyinTranslator.KEYWORDS_PATH;
+            InputStream keywords = PinyinTranslator.KEYWORDS_PATH.openStream();
             if (cmd.hasOption(JSurferOptions.KEYWORDS)) {
-                keywords = cmd.getOptionValue(JSurferOptions.KEYWORDS);
+                keywords = new FileInputStream( cmd.getOptionValue(JSurferOptions.KEYWORDS) );
             }
 
             translator = new PinyinTranslator( rules, keywords );

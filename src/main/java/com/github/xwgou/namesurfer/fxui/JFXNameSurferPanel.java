@@ -26,7 +26,7 @@ public class JFXNameSurferPanel extends GridPane {
     }
 
     public JFXNameSurferPanel( final ITranslator translator ) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/JFXNameSurferPanel.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/github/xwgou/namesurfer/fxml/JFXNameSurferPanel.fxml"));
         fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {

@@ -43,7 +43,7 @@ public class RenderPanel extends Pane {
     private RenderPanelController controller;
 
     public RenderPanel() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/RenderPanel.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/github/xwgou/namesurfer/fxml/RenderPanel.fxml"));
         fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {

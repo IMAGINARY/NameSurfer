@@ -69,7 +69,7 @@ public class RenderPanelController implements Initializable {
         imageView.fitHeightProperty().bind( size );
         imageView.xProperty().bind( pane.widthProperty().subtract( size ).divide( 2 ) );
         imageView.yProperty().bind( pane.heightProperty().subtract( size ).divide( 2 ) );
-        imageView.setImage( new Image( "http://www.algebraicsurface.net/images/AlgSurfTitlePic.jpg" ) );
+        imageView.setImage( new WritableImage( 1, 1 ) );
         imageView.setScaleY( -1.0 );
 
 
@@ -89,7 +89,7 @@ public class RenderPanelController implements Initializable {
         asr = new CPUAlgebraicSurfaceRenderer();
         try {
             Properties jsurf = new Properties();
-            jsurf.load( getClass().getResourceAsStream( "../gui/CayleyCubic.jsurf" ) );
+            jsurf.load( getClass().getResourceAsStream( "/com/github/xwgou/namesurfer/gui/CayleyCubic.jsurf" ) );
             FileFormat.load( jsurf, asr );
         } catch( Exception ex )
         {
@@ -100,7 +100,7 @@ public class RenderPanelController implements Initializable {
 
         minLowResRenderSize = new Dimension( 150, 150 );
         maxLowResRenderSize = new Dimension( 512, 512 );
-        desiredRenderSize = ( Dimension ) maxLowResRenderSize.clone(); 
+        desiredRenderSize = ( Dimension ) maxLowResRenderSize.clone();
 
         rsd = new RotateSphericalDragger();
         scale = new Matrix4d();

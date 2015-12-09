@@ -5,11 +5,13 @@
 package com.github.xwgou.namesurfer.translator;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.net.URL;
 
 /**
  *
@@ -28,66 +30,32 @@ public class SyllableTranslator implements ITranslator {
 //    private static final String PLUSEPSILON = "+0.00001";
     private static final String SUBEPSILON = "0";
 
-    private static String getRulesPath()
-    {
-        try {
-            return new File( SyllableTranslator.class.getResource( "rules.properties" ).toURI() ).getCanonicalPath();
-        } catch( Exception e )
-        {
-            throw new RuntimeException( e );
-        }
-    }
-
-    private static String getKeywordsPath()
-    {
-        try {
-            return new File( SyllableTranslator.class.getResource( "keywords.properties" ).toURI() ).getCanonicalPath();
-        } catch( Exception e )
-        {
-            throw new RuntimeException( e );
-        }
-    }
-
-    public static final String RULES_PATH = getRulesPath();
-    public static final String KEYWORDS_PATH = getKeywordsPath();
+    public static final URL RULES_PATH = SyllableTranslator.class.getResource( "rules.properties" );
+    public static final URL KEYWORDS_PATH = SyllableTranslator.class.getResource( "keywords.properties" );
 
     public SyllableTranslator() {
-        this.rules = new Properties();
-        this.keywords = new Properties();
-
         try {
-            this.rules.load(new FileInputStream(RULES_PATH));
-            this.keywords.load(new FileInputStream(KEYWORDS_PATH));
+            init( RULES_PATH.openStream(), KEYWORDS_PATH.openStream() );
         } catch( IOException e ) {
             throw new RuntimeException( e );
         }
-//        this.addEpsilonToKeywords();
-//        loadDefaultKeyWords();
-//        loadDefaultRules();
     }
 
     public SyllableTranslator(String rulesFile, String keywordsFile) throws IOException {
+        this( new FileInputStream(rulesFile), new FileInputStream(keywordsFile) );
+    }
+
+    public SyllableTranslator(InputStream rulesStream, InputStream keywordsStream) throws IOException {
+        init( rulesStream, keywordsStream );
+    }
+
+    private void init(InputStream rulesStream, InputStream keywordsStream) throws IOException {
         this.rules = new Properties();
         this.keywords = new Properties();
 
-        this.rules.load(new FileInputStream(rulesFile));
-        this.keywords.load(new FileInputStream(keywordsFile));
-//        this.addEpsilonToKeywords();
-//        loadDefaultRules();
-//        loadDefaultKeyWords();
+        this.rules.load( rulesStream );
+        this.keywords.load( keywordsStream );
     }
-
-//    private void addEpsilonToKeywords() {
-//        if (this.keywords != null && !this.keywords.isEmpty()) {
-//            Iterator<Object> it = this.keywords.keySet().iterator();
-//            while (it.hasNext()) {
-//                String key = (String) it.next();
-//                String newValue = this.keywords.getProperty(key) + PLUSEPSILON;
-//                this.keywords.setProperty(key, newValue);
-//            }
-//
-//        }
-//    }
 
     public String translate(String phrase) {
         if (phrase.length() == 0) {
