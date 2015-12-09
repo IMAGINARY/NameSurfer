@@ -6,6 +6,7 @@
 package com.github.xwgou.namesurfer.translator;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 public class PinyinTranslator extends  SyllableTranslator {
 
 
-    public PinyinTranslator() throws IOException {
+    public PinyinTranslator() {
         super();
     }
 
@@ -30,6 +31,9 @@ public class PinyinTranslator extends  SyllableTranslator {
         super(arg, arg0);
     }
 
+    public PinyinTranslator(InputStream rulesStream, InputStream keywordsStream) throws IOException {
+        super( rulesStream, keywordsStream );
+    }
 
     @Override
     public String translate(String phrase) {

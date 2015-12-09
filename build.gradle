@@ -1,9 +1,7 @@
 group = 'com.github.xwgou'
 version = '0.1.0'
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'eclipse'
+apply from: 'https://bintray.com/artifact/download/shemnon/javafx-gradle/8.1.1/javafx.plugin'
 
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
@@ -17,9 +15,13 @@ repositories {
 dependencies {
     compile group: 'de.mfo.jsurf', name: 'jsurf', version: '0.3.0'
     compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
-    compile group: 'commons-cli', name: 'commons-cli', version: '1.3.1'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
     compile group: 'com.belerweb', name: 'pinyin4j', version: '2.5.0'
     compile group: 'net.java.dev', name: 'colorchooser', version: '1.0'
+    compile group: 'org.jfxtras', name: 'jfxtras-labs', version: '8.0-r4'
+    compile 'org.slf4j:slf4j-api:1.7.10'
+    runtime 'ch.qos.logback:logback-classic:1.0.13'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
@@ -27,4 +29,31 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
-mainClassName = 'com.github.xwgou.namesurfer.JSurfer'
+jar {
+    manifest {
+        attributes( "Implementation-Title": project.group,
+                   "Implementation-Version": project.version,
+                   "Implementation-Vendor": "Xin Wei Gou and Christian Stussak" )
+    }
+}
+
+javafx {
+    appID 'NameSurfer'
+    appName 'NameSurfer'
+    category = 'Visualization'
+    copyright = 'Copyright (c) 2015 Xin Wei Gou and Christian Stussak'
+    description = '''Interactive visualization of algebraic surfaces.'''
+    vendor = 'Xin Wei Gou and Christian Stussak'
+
+    mainClass = 'com.github.xwgou.namesurfer.NameSurfer'
+
+    icons {
+        shortcut = [
+                'icon-256.png'
+        ]
+        volume = shortcut
+        setup = 'icon-32.bmp'
+    }
+
+    installSystemWide = true
+}
