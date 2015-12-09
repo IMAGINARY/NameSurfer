@@ -17,8 +17,8 @@ public class JFXNameSurferPanel extends GridPane {
 
     final static Logger logger = LoggerFactory.getLogger( JFXNameSurferPanel.class );
 
-    private Node view;
-    private JFXNameSurferPanelController controller;
+    protected Node view;
+    protected JFXNameSurferPanelController controller;
 
     public JFXNameSurferPanel()
     {

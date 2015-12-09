@@ -2,6 +2,7 @@ package com.github.xwgou.namesurfer.fxui;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +37,9 @@ public class JFXNameSurferPanelController implements Initializable {
 
     @FXML protected CustomColorPicker ccp1;
     @FXML protected CustomColorPicker ccp2;
+
+    @FXML protected Button exportButton;
+    @FXML protected Button saveButton;
 
     final private ITranslator translator;
 

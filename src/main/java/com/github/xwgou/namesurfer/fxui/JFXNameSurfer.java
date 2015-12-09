@@ -32,6 +32,7 @@ public class JFXNameSurfer extends Application {
 
     static PinyinTranslator translator;
     static boolean fullscreen;
+    static boolean disable_buttons;
 
     @Override
     public void start (final Stage stage) {
@@ -43,6 +44,9 @@ public class JFXNameSurfer extends Application {
             Pane root = scp.getContentPane();
 
             final JFXNameSurferPanel rootNode = new JFXNameSurferPanel( translator );
+            rootNode.controller.exportButton.setDisable( disable_buttons );
+            rootNode.controller.saveButton.setDisable( disable_buttons );
+
             root.getChildren().add( rootNode );
             scp.widthProperty().addListener(
                 new ChangeListener(){
@@ -113,6 +117,7 @@ public class JFXNameSurfer extends Application {
     		}
 
             fullscreen = cmd.hasOption( JSurferOptions.FULLSCREEN );
+            disable_buttons = cmd.hasOption( JSurferOptions.DISABLE_BUTTONS );
 
             InputStream rules = PinyinTranslator.RULES_PATH.openStream();
             if (cmd.hasOption(JSurferOptions.RULES)) {
