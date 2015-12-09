@@ -25,12 +25,15 @@ import javafx.scene.paint.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Properties;
 import java.io.IOException;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
+
+import de.mfo.jsurf.util.FileFormat;
 
 public class RenderPanel extends Pane {
 
@@ -94,5 +97,10 @@ public class RenderPanel extends Pane {
     public Image getImage()
     {
         return controller.imageView.getImage();
+    }
+
+    public Properties getJSurf()
+    {
+        return FileFormat.save( controller.asr );
     }
 }

@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.io.IOException;
 import java.io.File;
+import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
 import de.mfo.jsurf.gui.JSurferRenderPanel;
@@ -98,7 +99,19 @@ public class JFXNameSurferPanelController implements Initializable {
 
     @FXML void handleSave( ActionEvent e )
     {
-        logger.debug( "Save .jsurf" );
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save .jsurf");
+        fileChooser.setInitialDirectory( new File( System.getProperty( "user.home" ) ) );
+        fileChooser.setInitialFileName( nameTextField.getText() );
+        fileChooser.getExtensionFilters().add( new ExtensionFilter("jSurf file", "*.jsurf") );
+        File file = fileChooser.showSaveDialog( renderPanel.getScene().getWindow() );
+        if (file != null) {
+            try {
+                renderPanel.getJSurf().store( new FileOutputStream( file ), "Created by NameSurfer" );
+            } catch( IOException ex ) {
+                logger.error( "{}", ex );
+            }
+        }
         e.consume();
     }
 }
