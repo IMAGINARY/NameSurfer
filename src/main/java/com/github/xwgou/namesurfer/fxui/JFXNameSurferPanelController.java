@@ -113,7 +113,8 @@ public class JFXNameSurferPanelController implements Initializable {
         File file = fileChooser.showSaveDialog( renderPanel.getScene().getWindow() );
         if (file != null) {
             try {
-                renderPanel.getJSurf().store( new FileOutputStream( file ), "Created by NameSurfer" );
+                renderPanel.getJSurf().store( new FileOutputStream( file ), "Created by NameSurfer v"
+                    + JFXNameSurfer.class.getPackage().getImplementationVersion() );
             } catch( IOException ex ) {
                 logger.error( "{}", ex );
             }

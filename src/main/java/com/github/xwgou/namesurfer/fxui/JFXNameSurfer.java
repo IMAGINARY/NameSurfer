@@ -18,7 +18,7 @@ import com.github.xwgou.namesurfer.translator.PinyinTranslator;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.PosixParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -87,9 +87,27 @@ public class JFXNameSurfer extends Application {
 
     public static void main(String[] args) {
         JSurferOptions options = new JSurferOptions();
+
+        HelpFormatter formatter = new HelpFormatter();
+        String cmd_line_syntax = "namesurfer [options]";
+        String help_header = "NameSurfer renderes beautiful algebraic surfaces derived from your name.";
+        String help_footer = "";
+
         try {
-            CommandLineParser parser = new DefaultParser();
+            CommandLineParser parser = new PosixParser();
             CommandLine cmd = parser.parse( options, args);
+
+            if( cmd.hasOption( JSurferOptions.HELP ) )
+			{
+    			formatter.printHelp( cmd_line_syntax, help_header, options, help_footer );
+    			return;
+    		}
+
+			if( cmd.hasOption( JSurferOptions.VERSION ) )
+			{
+				System.out.println( JFXNameSurfer.class.getPackage().getImplementationVersion() );
+    			return;
+    		}
 
             String rules = PinyinTranslator.RULES_PATH;
             if (cmd.hasOption(JSurferOptions.RULES)) {
@@ -106,7 +124,6 @@ public class JFXNameSurfer extends Application {
             launch(args);
         } catch ( Throwable t ) {
             logger.error( "Exception during application startup", t );
-            HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp( "help", options);
             System.exit(-1);
         }

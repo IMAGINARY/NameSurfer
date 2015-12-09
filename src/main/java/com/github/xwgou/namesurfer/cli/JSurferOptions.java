@@ -1,6 +1,7 @@
 package com.github.xwgou.namesurfer.cli;
 
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 
 /**
@@ -9,10 +10,15 @@ import org.apache.commons.cli.Options;
  * @author xwgou
  */
 public class JSurferOptions extends Options {
+    public static String HELP = "help";
+    public static String VERSION = "version";
     public static String RULES = "r";
     public static String KEYWORDS = "k";
-    
+
     public JSurferOptions() {
+        Option help = OptionBuilder.withLongOpt( "help" ).withDescription( "display this help text and exit" ).create();
+        Option version = OptionBuilder.withLongOpt( "version" ).withDescription( "print program version and exit" ).create();
+
         Option r = new Option( "r", "rules", true, "specify the word translation "
                 + "rules as rules.properties. Example: "
                 + "-r $yourpath/rules.properties" );
@@ -21,6 +27,8 @@ public class JSurferOptions extends Options {
                 + " translation as keywords.properties. Example: "
                 + "-k $yourpath/keywords.properties" );
 
+        this.addOption( help );
+        this.addOption( version );
         this.addOption(r);
         this.addOption(k);
     }
