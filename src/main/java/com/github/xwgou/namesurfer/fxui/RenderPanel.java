@@ -90,4 +90,9 @@ public class RenderPanel extends Pane {
     public ObjectProperty< Color > backColorProperty() {
         return controller.backColor;
     }
+
+    public Image getImage()
+    {
+        return controller.imageView.getImage();
+    }
 }

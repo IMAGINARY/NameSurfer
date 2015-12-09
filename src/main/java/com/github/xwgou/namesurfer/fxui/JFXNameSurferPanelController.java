@@ -3,13 +3,19 @@ package com.github.xwgou.namesurfer.fxui;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
 import javafx.application.Platform;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.embed.swing.SwingFXUtils;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.io.IOException;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 import de.mfo.jsurf.gui.JSurferRenderPanel;
 
@@ -74,7 +80,19 @@ public class JFXNameSurferPanelController implements Initializable {
 
     @FXML void handleExportImage( ActionEvent e )
     {
-        logger.debug( "Export image" );
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export image");
+        fileChooser.setInitialDirectory( new File( System.getProperty( "user.home" ) ) );
+        fileChooser.setInitialFileName( nameTextField.getText() );
+        fileChooser.getExtensionFilters().add( new ExtensionFilter("PNG image", "*.png") );
+        File file = fileChooser.showSaveDialog( renderPanel.getScene().getWindow() );
+        if (file != null) {
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage( renderPanel.getImage(), null ), "png", file );
+            } catch( IOException ex ) {
+                logger.error( "{}", ex );
+            }
+        }
         e.consume();
     }
 
