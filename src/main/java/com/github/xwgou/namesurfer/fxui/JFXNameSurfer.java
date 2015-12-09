@@ -31,6 +31,7 @@ public class JFXNameSurfer extends Application {
     final static Logger logger = LoggerFactory.getLogger( JFXNameSurfer.class );
 
     static PinyinTranslator translator;
+    static boolean fullscreen;
 
     @Override
     public void start (final Stage stage) {
@@ -70,6 +71,7 @@ public class JFXNameSurfer extends Application {
 
             stage.setTitle("NameSurfer");
             stage.setScene(scene);
+            stage.setFullScreen( fullscreen );
             stage.show();
         }
         catch( Exception ex )
@@ -109,6 +111,8 @@ public class JFXNameSurfer extends Application {
 				System.out.println( JFXNameSurfer.class.getPackage().getImplementationVersion() );
     			return;
     		}
+
+            fullscreen = cmd.hasOption( JSurferOptions.FULLSCREEN );
 
             InputStream rules = PinyinTranslator.RULES_PATH.openStream();
             if (cmd.hasOption(JSurferOptions.RULES)) {

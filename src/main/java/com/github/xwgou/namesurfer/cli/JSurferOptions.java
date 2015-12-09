@@ -14,6 +14,7 @@ public class JSurferOptions extends Options {
     public static String VERSION = "version";
     public static String RULES = "r";
     public static String KEYWORDS = "k";
+    public static String FULLSCREEN = "f";
 
     public JSurferOptions() {
         Option help = OptionBuilder.withLongOpt( "help" ).withDescription( "display this help text and exit" ).create();
@@ -27,9 +28,12 @@ public class JSurferOptions extends Options {
                 + " translation as keywords.properties. Example: "
                 + "-k $yourpath/keywords.properties" );
 
+        Option f = new Option( "f", "fullscreen", false, "run in full screen mode" );
+
         this.addOption( help );
         this.addOption( version );
-        this.addOption(r);
-        this.addOption(k);
+        this.addOption( r );
+        this.addOption( k );
+        this.addOption( f );
     }
 }
