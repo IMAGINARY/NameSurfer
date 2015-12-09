@@ -9,6 +9,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
+import javafx.application.Platform;
 
 import de.mfo.jsurf.gui.JSurferRenderPanel;
 
@@ -60,6 +61,15 @@ public class JFXNameSurferPanelController implements Initializable {
         ccp2.setCustomColor( Color.web( "0x3e290aff" ) );
         renderPanel.frontColorProperty().bind( ccp1.customColorProperty() );
         renderPanel.backColorProperty().bind( ccp2.customColorProperty() );
+
+        // focus something different than the text fields in order to make
+        // their prompt texts visible
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                renderPanel.requestFocus();
+            }
+        });
     }
 
     @FXML void handleExportImage( ActionEvent e )
