@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.paint.Color;
 
 import de.mfo.jsurf.gui.JSurferRenderPanel;
 
@@ -54,6 +55,9 @@ public class JFXNameSurferPanelController implements Initializable {
         );
         renderPanel.formulaProperty().bind( formulaTextField.textProperty() );
 
+        // set initial font and back colors and bind renderer to color pickers
+        ccp1.setCustomColor( Color.web( "0xffbc00ff" ) );
+        ccp2.setCustomColor( Color.web( "0x3e290aff" ) );
         renderPanel.frontColorProperty().bind( ccp1.customColorProperty() );
         renderPanel.backColorProperty().bind( ccp2.customColorProperty() );
     }
