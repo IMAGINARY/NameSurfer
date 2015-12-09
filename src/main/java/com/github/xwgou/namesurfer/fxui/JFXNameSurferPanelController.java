@@ -62,6 +62,12 @@ public class JFXNameSurferPanelController implements Initializable {
             }
         );
         renderPanel.formulaProperty().bind( formulaTextField.textProperty() );
+        renderPanel.formulaValidProperty().addListener(
+            ( observable, oldVal, newVal ) -> {
+                logger.debug( "formulaValid: {}", newVal );
+                formulaTextField.setStyle( newVal ? "" : "-fx-background-color: red" );
+            }
+        );
 
         // set initial font and back colors and bind renderer to color pickers
         ccp1.setCustomColor( Color.web( "0xffbc00ff" ) );

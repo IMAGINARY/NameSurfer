@@ -70,6 +70,14 @@ public class RenderPanel extends Pane {
         return controller.formula;
     }
 
+    public Boolean getFormulaValid() {
+        return controller.formulaValid.getValue();
+    }
+
+    public ReadOnlyBooleanProperty formulaValidProperty() {
+        return controller.formulaValidRO;
+    }
+
     public void setFrontColor(Color c) {
         controller.frontColor.setValue( c );
     }

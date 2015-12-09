@@ -48,6 +48,7 @@ public class RenderPanelController implements Initializable {
 
     protected final StringProperty formula = new SimpleStringProperty( this, "formula", "0" );
     protected final BooleanProperty formulaValid = new SimpleBooleanProperty( this, "formulaValid", true );
+    protected final ReadOnlyBooleanProperty formulaValidRO = BooleanProperty.readOnlyBooleanProperty( formulaValid );
 
     protected final ObjectProperty<javafx.scene.paint.Color> frontColor = new SimpleObjectProperty<javafx.scene.paint.Color>(this, "frontColor", javafx.scene.paint.Color.RED);
     protected final ObjectProperty<javafx.scene.paint.Color> backColor = new SimpleObjectProperty<javafx.scene.paint.Color>(this, "backColor", javafx.scene.paint.Color.GREY);
@@ -115,11 +116,14 @@ public class RenderPanelController implements Initializable {
             {
                 try {
                     asr.setSurfaceFamily( newValue );
+                    formulaValid.setValue( true );
+                    rw.scheduleRepaint();
                 } catch ( Exception e ) {
-                    logger.error( "", e ); } rw.scheduleRepaint();
+                    logger.error( "", e );
+                    formulaValid.setValue( false );
                 }
             }
-        );
+        } );
 
         frontColor.addListener( (observable, oldValue, newValue) -> {
             de.mfo.jsurf.rendering.Material m = asr.getFrontMaterial();
