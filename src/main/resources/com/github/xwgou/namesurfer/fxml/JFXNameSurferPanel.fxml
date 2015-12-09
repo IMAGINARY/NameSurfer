@@ -16,9 +16,9 @@ http://stackoverflow.com/a/12681060/1496589
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="topNode" alignment="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" style="-fx-background-color: white;" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.xwgou.namesurfer.fxui.JFXNameSurferPanelController">
    <children>
-      <GridPane id="mainPane" hgap="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" vgap="7.0" VBox.vgrow="ALWAYS">
+      <GridPane fx:id="mainPane" hgap="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" vgap="7.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints minWidth="20.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
@@ -30,18 +30,18 @@ http://stackoverflow.com/a/12681060/1496589
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="20.0" />
         </rowConstraints>
          <children>
-            <RenderPanel id="renderPanel" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+            <RenderPanel fx:id="renderPanel" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin></RenderPanel>
             <Group GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <CustomColorPicker id="ccp1" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
+                  <CustomColorPicker fx:id="ccp1" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
                </children>
             </Group>
             <Group GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <CustomColorPicker id="ccp2" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
+                  <CustomColorPicker fx:id="ccp2" style="-fx-scale-x: 0.75; -fx-scale-y: 0.75;" />
                </children>
             </Group>
             <Label text="NameSurfer" textFill="#000000bf">
@@ -62,12 +62,12 @@ http://stackoverflow.com/a/12681060/1496589
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="0 = " />
-                        <TextField id="formula" editable="false" promptText="This is the formula for your name" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="formulaTextField" editable="false" promptText="This is the formula for your name" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <TextField id="name" promptText="Enter your name" />
-                  <Button id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Save" GridPane.columnIndex="1" />
-                  <Button id="exportButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Export image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="nameTextField" promptText="Enter your name" />
+                  <Button fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Save" GridPane.columnIndex="1" />
+                  <Button fx:id="exportButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Export image" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Pane prefHeight="20.0" prefWidth="20.0" GridPane.columnIndex="1" />
@@ -77,4 +77,4 @@ http://stackoverflow.com/a/12681060/1496589
          </VBox.margin>
       </GridPane>
    </children>
-</VBox>
+</fx:root>
