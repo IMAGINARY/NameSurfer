@@ -80,8 +80,8 @@ http://stackoverflow.com/a/12681060/1496589
                     </children>
                 </HBox>
                 <TextField fx:id="nameTextField" promptText="Enter your name"/>
-                <Button GridPane.columnIndex="1" fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSave" text="Save"/>
-                <Button GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="exportButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleExportImage" text="Export image"/>
+                <Button GridPane.columnIndex="1" fx:id="exportButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleExportImage" text="Export image"/>
+                <Button GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSave" text="Save"/>
             </children>
         </GridPane>
         <Pane GridPane.columnIndex="1" prefHeight="20.0" prefWidth="20.0"/>
