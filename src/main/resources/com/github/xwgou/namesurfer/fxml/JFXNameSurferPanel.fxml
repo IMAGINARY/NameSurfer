@@ -76,7 +76,7 @@ http://stackoverflow.com/a/12681060/1496589
                 <HBox GridPane.rowIndex="1" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="0 = "/>
-                        <TextField HBox.hgrow="ALWAYS" editable="false" fx:id="formulaTextField" promptText="This is the formula for your name"/>
+                        <TextField HBox.hgrow="ALWAYS" fx:id="formulaTextField" promptText="This is the formula for your name"/>
                     </children>
                 </HBox>
                 <TextField fx:id="nameTextField" promptText="Enter your name"/>

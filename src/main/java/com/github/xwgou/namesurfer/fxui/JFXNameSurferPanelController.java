@@ -1,6 +1,6 @@
 package com.github.xwgou.namesurfer.fxui;
 
-import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -46,11 +46,11 @@ public class JFXNameSurferPanelController implements Initializable {
         final CustomColorPicker ccp1 = this.ccp1;
         final CustomColorPicker ccp2 = this.ccp2;
 
-        formulaTextField.textProperty().bind(
-            Bindings.createStringBinding(
-                () -> translator.translate( nameTextField.getText() ),
-                nameTextField.textProperty()
-            )
+        // conect text fields and renderer
+        nameTextField.textProperty().addListener(
+            ( observable, oldVal, newVal ) -> {
+                formulaTextField.textProperty().setValue( translator.translate( newVal ) );
+            }
         );
         renderPanel.formulaProperty().bind( formulaTextField.textProperty() );
 
