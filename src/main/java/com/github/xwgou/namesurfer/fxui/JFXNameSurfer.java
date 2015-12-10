@@ -48,29 +48,24 @@ public class JFXNameSurfer extends Application {
             rootNode.controller.saveButton.setDisable( disable_buttons );
 
             root.getChildren().add( rootNode );
-            scp.widthProperty().addListener(
-                new ChangeListener(){
-                    @Override public void changed(ObservableValue o,Object oldVal, Object newVal)
-                    {
-                        scp.layout();
-                        scp.getContentPane().layout();
-                    }
-                }
-            );
 
             final Scene scene = new Scene(scp, 1024, 576);
             scene.getStylesheets().add(getClass().getResource("/com/github/xwgou/namesurfer/css/color.css").toExternalForm());
 
             scp.layoutBoundsProperty().addListener( (observable, oldValue, newValue) -> {
-                double aspect_ratio = scene.getWidth() / scene.getHeight();
+                double aspect_ratio = scp.getWidth() / scp.getHeight();
                 logger.debug( scp.getLayoutBounds().toString() );
                 logger.debug( "" + aspect_ratio );
-                rootNode.setPrefWidth( 1024 );
-                rootNode.setPrefHeight( 576 );
+
+                double w = 1024.0;
+                double h = 576.0;
                 if( aspect_ratio > 1024 / 576 )
-                    rootNode.setPrefWidth( 576 * aspect_ratio );
+                    w = 576 * aspect_ratio;
                 else
-                    rootNode.setPrefHeight( 1024 / aspect_ratio );
+                    h = 1024 / aspect_ratio;
+
+                rootNode.setPrefWidth( w );
+                rootNode.setPrefHeight( h );
             });
 
             stage.setTitle("NameSurfer");
