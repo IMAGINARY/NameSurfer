@@ -9,7 +9,6 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     maven { url "https://raw.github.com/IMAGINARY/maven-repository/master/" }
-    maven { url 'http://nexus.gephi.org/nexus/content/repositories/thirdparty/' }
 }
 
 dependencies {
@@ -17,7 +16,6 @@ dependencies {
     compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
     compile group: 'com.belerweb', name: 'pinyin4j', version: '2.5.0'
-    compile group: 'net.java.dev', name: 'colorchooser', version: '1.0'
     compile group: 'org.jfxtras', name: 'jfxtras-labs', version: '8.0-r4'
     compile 'org.slf4j:slf4j-api:1.7.10'
     runtime 'ch.qos.logback:logback-classic:1.0.13'
