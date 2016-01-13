@@ -8,15 +8,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - GPLv3 license
 
 ### Fixed
+- wrong release dates in the change log
 
-## [0.2.1] - 2014-02-11
+## [0.2.1] - 2015-12-11
 ### Added
 - change log
 
 ### Fixed
 - layout bug under Linux
 
-## [0.2.0] - 2014-02-09
+## [0.2.0] - 2015-12-09
 ### Changed
 - dropped Swing user interface
 - renamed main class from JSurfer to NameSurfer
