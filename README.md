@@ -26,3 +26,8 @@ Java development kit 8u66 or higher.
 
 For building and running, you can use OpenJDK.
 The `jfxDeploy` task needs Oracle JDK 8u66 or higher.
+
+License
+-------
+
+See the [`LICENSE`](LICENSE) file.
