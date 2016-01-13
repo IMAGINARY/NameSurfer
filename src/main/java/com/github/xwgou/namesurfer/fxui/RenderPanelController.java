@@ -224,7 +224,7 @@ public class RenderPanelController implements Initializable {
 
     protected void scaleSurface( int units )
     {
-        this.setScale(this.getScale()-units/50.0 );
+        this.setScale(this.getScale()-units/500.0 );
         rw.scheduleRepaint();
     }
 

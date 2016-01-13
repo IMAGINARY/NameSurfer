@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Changed
+- smoother scaling via scrolling
+
 ### Added
 - GPLv3 license
 
