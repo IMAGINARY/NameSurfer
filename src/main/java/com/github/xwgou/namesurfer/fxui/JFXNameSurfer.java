@@ -92,7 +92,7 @@ public class JFXNameSurfer extends Application {
 
         HelpFormatter formatter = new HelpFormatter();
         String cmd_line_syntax = "namesurfer [options]";
-        String help_header = "NameSurfer renderes beautiful algebraic surfaces derived from your name.";
+        String help_header = "NameSurfer renders beautiful algebraic surfaces derived from your name.";
         String help_footer = "";
 
         try {
